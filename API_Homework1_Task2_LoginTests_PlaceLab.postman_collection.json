@@ -4,7 +4,7 @@
 		"name": "API_Homework1_Task2_LoginTests_PlaceLab",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "27457597",
-		"_collection_link": "https://martian-desert-305865.postman.co/workspace/a74cfbfb-2571-4113-a4eb-6841646f9c45/collection/27457597-18219f61-da33-476b-b41d-f7e1d2bd16bd?action=share&creator=27457597&source=collection_link"
+		"_collection_link": "https://martian-desert-305865.postman.co/workspace/API_Homework_1~a74cfbfb-2571-4113-a4eb-6841646f9c45/collection/27457597-18219f61-da33-476b-b41d-f7e1d2bd16bd?action=share&creator=27457597&source=collection_link"
 	},
 	"item": [
 		{
@@ -22,7 +22,7 @@
 									"});",
 									"",
 									"var jsonData = JSON.parse(responseBody);",
-									"pm.environment.set(\"token\", jsonData.api_token);"
+									"pm.collectionVariables.set(\"token\", jsonData.api_token);"
 								],
 								"type": "text/javascript"
 							}
@@ -150,7 +150,7 @@
 									"",
 									"pm.test(\"Email mismatch message.\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.error).to.eql(\"Invalid email.\"); //suggested error message",
+									"    pm.expect(jsonData.error).to.eql(\"Invalid email.\"); // suggested error message",
 									"});"
 								],
 								"type": "text/javascript"
@@ -165,7 +165,7 @@
 							"urlencoded": [
 								{
 									"key": "email",
-									"value": "f{{email}}",
+									"value": "{{$randomEmail}}",
 									"type": "text"
 								},
 								{
@@ -222,7 +222,7 @@
 								},
 								{
 									"key": "password",
-									"value": "df{{password}}",
+									"value": "{{$randomPassword}}",
 									"type": "text"
 								}
 							]
@@ -254,7 +254,7 @@
 									"",
 									"pm.test(\"Email mismatch message.\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.error).to.eql(\"Invalid email.\"); //suggested error message",
+									"    pm.expect(jsonData.error).to.eql(\"Invalid email.\"); // suggested error message",
 									"});"
 								],
 								"type": "text/javascript"
@@ -358,7 +358,7 @@
 									"",
 									"pm.test(\"Email/password empty fields.\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.error).to.eql(\"Enter email and password\"); //suggestes message",
+									"    pm.expect(jsonData.error).to.eql(\"Enter email and password\"); // suggested message",
 									"});"
 								],
 								"type": "text/javascript"
@@ -398,6 +398,37 @@
 					"response": []
 				}
 			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": ""
+		},
+		{
+			"key": "url",
+			"value": "https://demo.placelab.com",
+			"type": "string"
 		}
 	]
 }

@@ -19,6 +19,8 @@ Smoke test consists of following steps:
   - find booking by ID
   - delete booking by ID
 
+- For several recived error messages, I found that displayed text is not properly describing actual state of the respond. According to that I suggested appropriate messages in comments.
+
 Task 2
 
 - Explore the PlaceLab API documentation.
@@ -28,5 +30,8 @@ Export Postman Collections, create a separate GitHub repository for API Testing,
 
 Note: Remember to avoid sharing your personal credentials on GitHub repositories
 
+- user should have valid credentials in order to run this collection
 
 - The .txt file (API_data_extraction_sample) needed for creating the Data Extraction Report is added to repository, and needs to be saved in the Postman/files directory.
+
+- For several recived error messages, I found that displayed text is not properly describing actual state of the respond. According to that I suggested appropriate messages in comments.

@@ -4,7 +4,7 @@
 		"name": "API_Homework1_Task1_SmokeTest_DummySite",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "27457597",
-		"_collection_link": "https://martian-desert-305865.postman.co/workspace/a74cfbfb-2571-4113-a4eb-6841646f9c45/collection/27457597-68fd94b2-2930-46f2-a4d9-8f55ec43b0bc?action=share&creator=27457597&source=collection_link"
+		"_collection_link": "https://martian-desert-305865.postman.co/workspace/API_Homework_1~a74cfbfb-2571-4113-a4eb-6841646f9c45/collection/27457597-68fd94b2-2930-46f2-a4d9-8f55ec43b0bc?action=share&creator=27457597&source=collection_link"
 	},
 	"item": [
 		{
@@ -19,7 +19,7 @@
 							"});",
 							"",
 							"var jsonData = JSON.parse(responseBody);",
-							"pm.environment.set(\"token\", jsonData.token);"
+							"pm.collectionVariables.set(\"token\", jsonData.token);"
 						],
 						"type": "text/javascript"
 					}
@@ -60,7 +60,7 @@
 							"    pm.response.to.have.status(200);",
 							"});",
 							"",
-							"pm.test(\"Validate set firstname, lastname and total price.\", function () {",
+							"pm.test(\"Validate set first name, last name and total price.\", function () {",
 							"    var jsonData = pm.response.json();",
 							"    pm.expect(jsonData.booking.firstname).to.eql(\"Aldin\");",
 							"    pm.expect(jsonData.booking.lastname).to.eql(\"Rizvo\");",
@@ -68,7 +68,7 @@
 							"});",
 							"",
 							"var jsonData = JSON.parse(responseBody);",
-							"pm.environment.set(\"AldinBookingID\", jsonData.bookingid);"
+							"pm.collectionVariables.set(\"createdBookingId\", jsonData.bookingid);"
 						],
 						"type": "text/javascript"
 					}
@@ -109,7 +109,7 @@
 							"    pm.response.to.have.status(200);",
 							"});",
 							"",
-							"pm.test(\"Validate changed firstname, lastname and total price.\", function () {",
+							"pm.test(\"Validate changed first name, last name and total price.\", function () {",
 							"    var jsonData = pm.response.json();",
 							"    pm.expect(jsonData.firstname).to.eql(\"Aldin\");",
 							"    pm.expect(jsonData.lastname).to.eql(\"Rizvo\");",
@@ -139,13 +139,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{url}}/booking/{{AldinBookingID}}",
+					"raw": "{{url}}/booking/{{createdBookingId}}",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"booking",
-						"{{AldinBookingID}}"
+						"{{createdBookingId}}"
 					]
 				}
 			},
@@ -160,6 +160,13 @@
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {",
 							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Created booking id is found within all booking ids\", function () {",
+							"    const bookings = pm.response.json();",
+							"    const value = bookings.find(booking => booking.bookingid === pm.collectionVariables.get(\"createdBookingId\"));",
+							"",
+							"    pm.expect(value).to.not.be.undefined;",
 							"});",
 							""
 						],
@@ -193,7 +200,7 @@
 							"    pm.response.to.have.status(200);",
 							"});",
 							"",
-							"pm.test(\"Validate firstname, lastname and total price of customer by ID.\", function () {",
+							"pm.test(\"Validate first name, last name and total price of customer by ID.\", function () {",
 							"    var jsonData = pm.response.json();",
 							"    pm.expect(jsonData.firstname).to.eql(\"Aldin\");",
 							"    pm.expect(jsonData.lastname).to.eql(\"Rizvo\");",
@@ -208,13 +215,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{url}}/booking/{{AldinBookingID}}",
+					"raw": "{{url}}/booking/{{createdBookingId}}",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"booking",
-						"{{AldinBookingID}}"
+						"{{createdBookingId}}"
 					]
 				}
 			},
@@ -227,12 +234,12 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(201);",
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201); // 200 (OK) or 204 (No content) status code is more appropriate",
 							"});",
 							"",
 							"pm.test(\"Validate booking delete message\", function () {",
-							"    pm.expect(pm.response.text()).to.include(\"Created\");",
+							"    pm.expect(pm.response.text()).to.include(\"Created\"); // Created makes no sense",
 							"});"
 						],
 						"type": "text/javascript"
@@ -249,13 +256,13 @@
 					}
 				],
 				"url": {
-					"raw": "{{url}}/booking/{{AldinBookingID}}",
+					"raw": "{{url}}/booking/{{createdBookingId}}",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"booking",
-						"{{AldinBookingID}}"
+						"{{createdBookingId}}"
 					]
 				}
 			},
@@ -280,6 +287,23 @@
 					""
 				]
 			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "https://restful-booker.herokuapp.com",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "createdBookingId",
+			"value": "",
+			"type": "string"
 		}
 	]
 }
